@@ -1,0 +1,175 @@
+/* ───────── 초대장 화면 ─────────
+   모바일 기준 390×1220 확정 시안(06 Invitation)과 동일            */
+
+.invite { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
+
+.invite-orb-1 { left: 150px; top: -120px; width: 380px; height: 380px;
+  background: radial-gradient(circle at 42% 42%, rgba(255,255,255,0.95) 0%, rgba(236,226,252,0.85) 30%, rgba(204,222,247,0.6) 52%, rgba(204,222,247,0) 70%); }
+.invite-orb-2 { left: -150px; top: 760px; width: 460px; height: 420px;
+  background: radial-gradient(circle at 55% 45%, rgba(255,255,255,0.9) 0%, rgba(236,226,252,0.8) 30%, rgba(204,222,247,0.55) 52%, rgba(204,222,247,0) 70%); }
+
+.invite-inner { position: relative; z-index: 1; padding: 0 var(--pad); }
+
+.invite-eyebrow {
+  margin-top: 48px;                    /* top 86 */
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.invite-title {
+  margin-top: 8px;                     /* top 108 */
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  outline: none;
+}
+.invite-title > span { display: block; }
+
+.invite-sub {
+  margin-top: 22px;                    /* top 212 */
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.58;
+  letter-spacing: -0.03em;
+  text-align: right;
+  color: var(--sub);
+  white-space: nowrap;
+}
+
+.invite-section { margin-top: 50px; }   /* 날짜 top 306 */
+.invite-place { margin-top: 59px; }
+.invite-work { margin-top: 40px; }
+
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hair);
+}
+.sec-head h2 { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
+.sec-head p { font-size: 12px; font-weight: 500; letter-spacing: -0.02em; color: var(--muted); white-space: nowrap; }
+
+.invite-year {
+  margin: 24px 0 14px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.date-list {
+  padding: 4px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 30px -24px rgba(38, 32, 58, 0.4);
+}
+.date-list li {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) auto;
+  align-items: center;
+  height: 52px;
+  border-bottom: 1px solid rgba(38, 32, 58, 0.09);
+  font-variant-numeric: tabular-nums;
+}
+.date-list li:last-child { border-bottom: 0; }
+.date-d { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.date-w { font-size: 14px; font-weight: 500; color: var(--muted); }
+.date-t { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+
+.place-name { margin-top: 22px; font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.045em; }
+.place-addr { margin-top: 8px; font-size: 14px; font-weight: 450; letter-spacing: -0.03em; color: var(--sub); }
+
+.work { position: relative; margin-top: 26px; padding-left: 18px; }
+.work-dot { position: absolute; left: 0; top: 14px; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+.work-en { font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -0.035em; }
+.work-ko { margin-top: 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.04em; }
+.work-meta { margin-top: 12px; font-size: 13px; font-weight: 500; letter-spacing: -0.02em; color: var(--muted); }
+
+.invite-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 56px;
+}
+.invite-actions .btn-chip { width: 40px; height: 40px; }
+
+.invite-footer {
+  margin-top: 40px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hair);
+}
+.foot-1 { font-size: 12.5px; font-weight: 600; letter-spacing: -0.02em; }
+.foot-2 { margin-top: 6px; font-size: 11.5px; font-weight: 450; letter-spacing: -0.02em; color: var(--muted); }
+
+@media (max-width: 370px) {
+  .invite-sub { font-size: 13.5px; }
+  .work-en { font-size: 28px; }
+}
+
+@media (min-width: 560px) and (max-width: 899px) {
+  .invite-inner { max-width: 520px; margin: 0 auto; }
+  .invite-orb-1 { left: auto; right: -100px; }
+}
+
+/* ───────── PC — 날짜(좌) / 장소·작품(우) ───────── */
+@media (min-width: 900px) {
+  .invite { padding-bottom: 56px; }
+  .invite-top { max-width: 1200px; margin: 0 auto; padding: 32px clamp(40px, 5.5vw, 88px) 0; font-size: 14px; }
+  .invite-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(40px, 5.5vw, 88px); }
+  .invite-orb-1 { left: auto; right: -60px; top: -160px; width: 620px; height: 620px; }
+  .invite-orb-2 { left: -160px; top: 520px; width: 640px; height: 560px; }
+
+  .invite-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 40px;
+    margin-top: 56px;
+  }
+  .invite-eyebrow { margin-top: 0; font-size: 14px; }
+  .invite-title { margin-top: 12px; font-size: clamp(44px, 4.2vw, 60px); line-height: 1.14; }
+  .invite-sub { margin-top: 0; font-size: 17px; line-height: 1.6; padding-bottom: 6px; }
+
+  .invite-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 96px);
+    margin-top: 72px;
+  }
+  .invite-section { margin-top: 0; }
+  .invite-place { margin-top: 0; }
+  .invite-work { margin-top: 56px; }
+  .sec-head h2 { font-size: 15px; }
+  .sec-head p { font-size: 14px; }
+  .invite-year { margin: 28px 0 18px; font-size: 26px; }
+  .date-list { padding: 6px 24px; }
+  .date-list li { grid-template-columns: 80px minmax(0, 1fr) auto; height: 60px; }
+  .date-d { font-size: 19px; }
+  .date-w, .date-t { font-size: 16px; }
+  .place-name { margin-top: 28px; font-size: 36px; }
+  .place-addr { margin-top: 10px; font-size: 16px; }
+  .work { margin-top: 30px; padding-left: 22px; }
+  .work-dot { top: 18px; width: 7px; height: 7px; }
+  .work-en { font-size: clamp(34px, 3vw, 40px); }
+  .work-ko { margin-top: 10px; font-size: 20px; }
+  .work-meta { margin-top: 14px; font-size: 15px; }
+
+  .invite-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 96px);
+    align-items: end;
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--hair);
+  }
+  .invite-actions { order: 2; margin-top: 0; gap: 10px; }
+  .invite-actions .btn { height: 64px; font-size: 17px; }
+  .invite-actions .btn-chip { width: 44px; height: 44px; }
+  .invite-footer { order: 1; margin-top: 0; padding-top: 0; border-top: 0; }
+  .foot-1 { font-size: 14px; }
+  .foot-2 { margin-top: 8px; font-size: 13px; }
+}

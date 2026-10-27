@@ -1,0 +1,152 @@
+/* ───────── Card ─────────
+   카드 내부 치수는 모두 cqw(카드 폭 기준 %)로 지정해,
+   크기가 바뀌거나 애니메이션 중에도 벡터처럼 선명하게 다시 그려집니다.
+   원본 시안: 뒷면 72×108 / 앞면 172×258                                */
+
+.card {
+  position: absolute;
+  container-type: inline-size;
+  aspect-ratio: 2 / 3;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+  background: linear-gradient(150deg, #ffffff 0%, #eee7fa 36%, #dce8f7 66%, #f5edf2 100%);
+}
+
+/* 펄 광택 띠 */
+.card-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(116deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.68) 46%, rgba(255, 255, 255, 0) 62%);
+  pointer-events: none;
+}
+
+/* ── 뒷면 (메인 화면 6장) ── */
+.card--back {
+  border-radius: 9.72% / 6.48%;           /* 7px @72×108 */
+  box-shadow: 0 16px 26px -18px rgba(38, 32, 58, 0.5);
+}
+.card--back .card-frame {
+  position: absolute;
+  inset: 8.33cqw;                          /* 6px */
+  border: 1px solid rgba(38, 32, 58, 0.12);
+  border-radius: 5.56cqw;                  /* 4px */
+}
+.card--back .card-dot {
+  position: absolute;
+  width: 6.94cqw;                          /* 5px */
+  height: 6.94cqw;
+  border-radius: 50%;
+  background: var(--ink);
+}
+/* 점은 모두 궤도 중심을 향합니다 */
+.dot-b  { left: 46.53cqw; top: 127.8cqw; }  /* bottom-center */
+.dot-bl { left: 18.06cqw; top: 125cqw; }    /* bottom-left  */
+.dot-tl { left: 18.06cqw; top: 18.06cqw; }  /* top-left     */
+.dot-t  { left: 46.53cqw; top: 15.28cqw; }  /* top-center   */
+.dot-tr { left: 75cqw;    top: 18.06cqw; }  /* top-right    */
+.dot-br { left: 75cqw;    top: 125cqw; }    /* bottom-right */
+
+/* ── 앞면 (결과 카드) ── */
+.card--front {
+  border-radius: 5.81% / 3.88%;            /* 10px @172×258 */
+  box-shadow: 0 30px 44px -26px rgba(38, 32, 58, 0.55);
+}
+.card--front .card-rings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 104.65cqw;                        /* 180px */
+  height: 104.65cqw;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, rgba(38, 32, 58, 0) 0 7.56cqw, rgba(38, 32, 58, 0.09) 7.56cqw 8.14cqw);
+  -webkit-mask-image: radial-gradient(circle, #000 25%, transparent 68%);
+  mask-image: radial-gradient(circle, #000 25%, transparent 68%);
+}
+.card--front .card-frame {
+  position: absolute;
+  inset: 4.65cqw;                          /* 8px */
+  border: 1px solid rgba(38, 32, 58, 0.12);
+  border-radius: 3.49cqw;                  /* 6px */
+}
+.card--front .card-no {
+  position: absolute;
+  left: 9.88cqw;                           /* 17px */
+  top: 8.72cqw;                            /* 15px */
+  font-size: 10px;
+  font-size: 5.81cqw;                      /* 10px */
+  font-weight: 600;
+  line-height: 1.2;
+}
+.card--front .card-dot {
+  position: absolute;
+  left: 48.55cqw;
+  top: 11.05cqw;
+  width: 2.91cqw;                          /* 5px */
+  height: 2.91cqw;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.card--front .card-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4.65cqw;                            /* 8px */
+}
+.card--front .card-en {
+  font-size: 38px;
+  font-size: 22.09cqw;                     /* 38px */
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.card--front .card-ko {
+  font-size: 14px;
+  font-size: 8.14cqw;                      /* 14px */
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--sub);
+}
+
+/* 결과 화면 뒤 겹친 카드 */
+.card--ghost {
+  position: absolute;
+  aspect-ratio: 2 / 3;
+  border-radius: 5.81% / 3.88%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: linear-gradient(150deg, #ffffff 0%, #eee7fa 40%, #dce8f7 100%);
+}
+
+/* ───────── 날아가는 카드 (뽑기 애니메이션 전용) ───────── */
+.fly {
+  position: fixed;
+  z-index: 40;
+  left: 0;
+  top: 0;
+  perspective: 1100px;
+  pointer-events: none;
+}
+.fly-flipper {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.fly-face {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.fly-face.card--front { transform: rotateY(180deg); }
+/* 뒤집기가 끝나면 앞면을 평면 상태로 정리 (보이는 모습은 동일) */
+.fly.is-settled .fly-flipper { transform: none !important; }
+.fly.is-settled .fly-face.card--front { transform: none; }
+.fly.is-settled .fly-face.card--back { display: none; }
+/* 날아가는 뒷면은 72px 기준 비율 그대로, 크기만 큼 */
+.fly .card--back { box-shadow: 0 16px 26px -18px rgba(38, 32, 58, 0.5); }

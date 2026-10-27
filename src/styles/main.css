@@ -1,0 +1,149 @@
+/* ───────── 메인 화면 ─────────
+   모바일 기준 390×844 확정 시안(04)과 동일한 위치·크기          */
+
+.main {
+  --s: 1; /* 카드 궤도 배율 */
+  display: flex;
+  flex-direction: column;
+}
+
+.main-intro { position: relative; z-index: 2; padding: 0 var(--pad); }
+
+.main-title {
+  margin-top: 42px;                 /* top 80 */
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.17;
+  letter-spacing: -0.05em;
+}
+.main-title > span { display: block; }
+
+/* '응답' 텍스트 선택 하이라이트 */
+.hl {
+  position: relative;
+  display: inline-block;
+  padding: 0 3px;
+  margin: 0 -1px 0 -3px;
+  background: rgba(188, 174, 240, 0.55);
+}
+.hl i { position: absolute; background: var(--ink); font-style: normal; }
+.hl-line { width: 1.5px; }
+.hl-line-l { left: -1px; top: -0.139em; bottom: 0; }
+.hl-line-r { right: -1px; top: 0; bottom: -0.139em; }
+.hl-knob { width: 0.208em; height: 0.208em; border-radius: 50%; }
+.hl-knob-l { left: calc(-0.104em - 0.25px); top: -0.278em; }
+.hl-knob-r { right: calc(-0.104em - 0.25px); bottom: -0.278em; }
+
+.main-sub {
+  margin-top: 18px;                 /* top 224 */
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.58;
+  letter-spacing: -0.03em;
+  text-align: right;
+  color: var(--sub);
+}
+
+/* 카드 궤도 */
+.ring-wrap {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+}
+.ring {
+  position: relative;
+  width: 100%;
+  height: calc(384px * var(--s));
+}
+.ring-orb {
+  left: 50%;
+  top: 50%;
+  width: calc(340px * var(--s));
+  height: calc(340px * var(--s));
+  transform: translate(-50%, -50%);
+}
+.ring-cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  opacity: 0.55;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 18px 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 1px 18px no-repeat;
+}
+.ring-card {
+  width: calc(72px * var(--s));
+  left: calc(50% + (var(--dx) * 1px - 36px) * var(--s));
+  top: calc(50% + (var(--dy) * 1px - 54px) * var(--s));
+  transform: rotate(var(--r));
+}
+
+.main-cta {
+  position: relative;
+  z-index: 2;
+  padding: 30px var(--pad) calc(62px + env(safe-area-inset-bottom));
+}
+
+/* 작은 화면 높이 — 궤도를 줄여 버튼이 화면 안에 들어오도록 */
+@media (max-height: 800px) and (max-width: 899px) {
+  .main { --s: 0.86; }
+  .ring-wrap { padding-top: 28px; }
+  .main-cta { padding-top: 24px; padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+}
+@media (max-height: 700px) and (max-width: 899px) {
+  .main { --s: 0.72; }
+  .main-title { margin-top: 30px; font-size: 33px; }
+  .ring-wrap { padding-top: 16px; }
+  .main-cta { padding-top: 16px; padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
+}
+/* 좁은 폭 (360px 전후) */
+@media (max-width: 370px) {
+  .main-title { font-size: 34px; }
+}
+
+/* 태블릿 — 모바일 구성을 유지하되 폭을 제한 */
+@media (min-width: 560px) and (max-width: 899px) {
+  .main { max-width: 520px; margin: 0 auto; }
+  .main { --s: 1.08; }
+}
+
+/* ───────── PC ───────── */
+@media (min-width: 900px) {
+  .main {
+    --s: 1.32;
+    --pad: 0px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-rows: auto 1fr auto auto 1fr;
+    grid-template-areas:
+      'top top'
+      '.   ring'
+      'intro ring'
+      'cta ring'
+      '.   ring';
+    column-gap: clamp(24px, 4vw, 72px);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(40px, 5.5vw, 88px);
+  }
+  .main-top { grid-area: top; padding-top: 32px; font-size: 14px; }
+  .main-intro { grid-area: intro; max-width: 470px; }
+  .main-title { margin-top: 0; font-size: clamp(46px, 4.2vw, 62px); line-height: 1.14; }
+  .main-sub { margin-top: 28px; font-size: 17px; line-height: 1.6; }
+  .ring-wrap { grid-area: ring; padding: 32px 0; }
+  .main-cta { grid-area: cta; max-width: 470px; padding: 52px 0 0; }
+  .main-cta .btn { height: 64px; font-size: 17px; padding-left: 26px; padding-right: 10px; }
+  .main-cta .btn-chip { width: 44px; height: 44px; }
+
+  @media (hover: hover) {
+    .ring-card { transition: translate 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out); }
+    .ring:not(.is-busy) .ring-card:hover { translate: 0 -6px; box-shadow: 0 22px 30px -18px rgba(38, 32, 58, 0.55); }
+  }
+}
+@media (min-width: 900px) and (max-height: 760px) { .main { --s: 1.12; } }
+@media (min-width: 1400px) and (min-height: 860px) { .main { --s: 1.5; } }
