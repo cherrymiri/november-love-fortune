@@ -110,7 +110,6 @@ export const INVITE = {
   subLine2: '11월의 끝, 졸업전시에서 만나보세요.',
   year: '2026',
   dates: [
-    { date: '11.26', day: '목', time: '18:00–20:00' },
     { date: '11.27', day: '금', time: '10:30–20:00' },
     { date: '11.28', day: '토', time: '10:30–20:00' },
     { date: '11.29', day: '일', time: '10:30–17:00' },
